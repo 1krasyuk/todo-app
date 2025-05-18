@@ -1,0 +1,185 @@
+
+*,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+#app {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background-color: #f8f8f8;
+  width: 300px;
+  padding: 20px;
+  height: 100vh;
+  box-sizing: border-box; /* Чтобы padding не увеличивал высоту */
+  flex-shrink: 0;
+  border-right: 1px solid #f8f8f8;
+  box-shadow: 0px 0px 15px #b3b3b3;
+}
+
+.sidebar-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.projects-section {
+}
+
+.projects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.projects-header h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+#btn-add-project {
+  width: 30px;          
+  height: 30px;         
+  padding: 0;           
+  border: none;         
+  background-color: transparent;
+  display: flex;        
+  align-items: center;  
+  justify-content: center; 
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+#btn-add-project:hover {
+  background-color: rgb(224, 224, 224);
+}
+
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.project-item {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.project-item:hover {
+  background-color: rgb(224, 224, 224);
+}
+
+.project-item svg {
+  width: 20px;
+  height: 20px;
+}
+
+.project-list-name {
+  font-size: 1.2rem;
+}
+
+/* MAIN CONTENT */
+
+.main-content {
+  padding: 1.5rem 3rem;
+  width: 100%;
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgb(182, 182, 182);
+  
+}
+
+.project-header-actions button {
+  display: inline-flex;  
+  align-items: center; 
+  justify-content: center; 
+  gap: 8px;   
+  background-color: transparent;
+  border: 1px solid;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.project-header-actions  {
+  flex-shrink: 0;
+}
+
+.btn-rename {
+  color: rgb(78, 78, 78);
+  transition: all 0.3s ease;
+}
+
+.btn-rename:hover {
+  background-color:rgb(230, 230, 230);
+}
+
+.btn-delete {
+  color: rgb(255, 44, 44);
+  transition: all 0.3s ease;
+}
+
+.btn-delete:hover {
+  background-color:rgb(255, 234, 234);
+}
+
+.project-header-actions button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.todo-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  gap: 1.5rem;
+}
+
+.todo-actions button {
+  display: inline-flex;  
+  align-items: center; 
+  justify-content: center; 
+  gap: 5px;   
+  background-color: rgb(230, 230, 230);;
+  border: 0.5px solid ;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.btn-add-task:hover {
+  background-color: rgb(243, 243, 243);
+  /* transform: translateY(-1px); */
+}
+
+.btn-sort:hover {
+  background-color: rgb(243, 243, 243);
+}
+
+.todo-actions button svg {
+  width: 18px;
+  height: 18px;
+}
+

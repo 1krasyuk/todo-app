@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/calendar-check.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+  </head>
+  <body>
+    <div id="app">
+      <aside class="sidebar">
+        <h1 class="sidebar-title">TodoApp</h1>
+        <section class="projects-section">
+          <div class="projects-header">
+            <h2>Projects</h2>
+            <button id="btn-add-project">
+              <i data-lucide="plus"></i>
+            </button>
+          </div>
+          <div class="projects-list">
+          <div class="project-item">
+            <i data-lucide="list"></i>
+            <p class="project-list-name">Project 1</p>
+          </div>
+          <div class="project-item">
+            <i data-lucide="list"></i>
+            <p class="project-list-name">Project 2</p>
+          </div>
+        </div>
+        </section>
+      </aside>
+      <main class="main-content">
+        <div class="main-header">
+          <h2 class="project-header-title">Project header</h2>
+          <div class="project-header-actions">
+            <button class="btn-rename"><i data-lucide="edit"></i>Edit</button>
+            <button class="btn-delete"><i data-lucide="trash-2"  ></i>Delete</button>
+          </div>
+        </div>
+          <div class="todo-actions">
+            <button class="btn-add-task"><i data-lucide="plus"></i>New task</button>
+            <button class="btn-sort"><i data-lucide="arrow-down-up"></i>Sort by</button>
+          </div>
+
+
+        <div class="todos">
+          <!-- Сюда будут добавляться задачи -->
+        </div>
+      </main>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
