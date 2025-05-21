@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'projects';
+const STORAGE_KEY = "projects";
 
 class ProjectManager {
   constructor() {
@@ -25,12 +25,12 @@ class ProjectManager {
   }
 
   removeProject(id) {
-    this.projects = this.projects.filter(project => project.id !== id);
+    this.projects = this.projects.filter((project) => project.id !== id);
     this.saveProjects();
   }
 
   updateProject(id, newName) {
-    const project = this.projects.find(p => p.id === id);
+    const project = this.projects.find((p) => p.id === id);
     if (project) {
       project.name = newName;
       this.saveProjects();

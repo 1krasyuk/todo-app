@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'todos';
+const STORAGE_KEY = "todos";
 
 class TodoManager {
   constructor() {
@@ -37,7 +37,9 @@ class TodoManager {
 
   removeTodo(projectId, todoId) {
     if (this.todos[projectId]) {
-      this.todos[projectId] = this.todos[projectId].filter(t => t.id !== todoId);
+      this.todos[projectId] = this.todos[projectId].filter(
+        (t) => t.id !== todoId
+      );
       this.saveTodos();
     }
   }
@@ -46,7 +48,7 @@ class TodoManager {
     const projectTodos = this.todos[projectId];
     if (!projectTodos) return;
 
-    const todo = projectTodos.find(t => t.id === todoId);
+    const todo = projectTodos.find((t) => t.id === todoId);
     if (todo) {
       Object.assign(todo, updates);
       this.saveTodos();
@@ -54,7 +56,7 @@ class TodoManager {
   }
 
   toggleCompleted(projectId, todoId) {
-    const todo = this.todos[projectId]?.find(t => t.id === todoId);
+    const todo = this.todos[projectId]?.find((t) => t.id === todoId);
     if (todo) {
       todo.completed = !todo.completed;
       this.saveTodos();
@@ -69,9 +71,10 @@ class TodoManager {
   sortTodosByPriority(projectId) {
     const todos = this.getTodosByProject(projectId);
     const priorityOrder = { high: 1, medium: 2, low: 3 };
-    return [...todos].sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
+    return [...todos].sort(
+      (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]
+    );
   }
-
 }
 
 export default new TodoManager();
