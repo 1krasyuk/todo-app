@@ -1,69 +1,88 @@
 import "./style.css";
-import { createIcons, icons } from 'lucide'; 
-createIcons({icons})
-// import { createTodo } from "./todo.js";
-// import { renderTodos } from "./dom.js";
+import { createIcons, icons } from 'lucide';
 
-// const todos = loadTodos();
+import ProjectModal from './components/projectModal.js';
+import projectManager from './components/projectManager.js';
+import { renderAllProjects } from './components/projectRenderer.js';
+import { getActiveProject, selectProject } from './components/projectSelection.js';
 
-// import {
-//   saveTodos,
-//   loadTodos,
-//   saveProjects,
-//   loadProjects,
-//   saveCurrentProject,
-//   loadCurrentProject,
-// } from "./storage.js";
+import TodoModal from './components/todoModal.js';
+import { renderTodosForProject } from './components/todoRenderer.js';
+import todoManager from './components/todoManager.js';
+import { renderTodosFromArray } from './components/todoRenderer.js';
 
-// let projects = loadProjects();
-// let currentProject = loadCurrentProject();
+let sortMode = 'title'; // стартовая сортировка
 
-document.querySelector("#").innerHTML = `
- 
-`;
 
-// const input = document.querySelector("#todo-input");
-// const addBtn = document.querySelector("#add-btn");
 
-// const list = document.querySelector("#todo-list");
-// addBtn.addEventListener("click", () => {
-//   const titleEl = document.querySelector("#todo-title");
-//   const descEl = document.querySelector("#todo-desc");
-//   const dateEl = document.querySelector("#todo-date");
-//   const priorityEl = document.querySelector("#todo-priority");
 
-//   addBtn.addEventListener("click", () => {
-//     const title = titleEl.value.trim();
-//     const description = descEl.value.trim();
-//     const dueDate = dateEl.value;
-//     const priority = priorityEl.value;
 
-//     if (!title) return;
+// ========== ИНИЦИАЛИЗАЦИЯ ==========
+createIcons({ icons });
 
-//     const newTodo = createTodo({ title, description, dueDate, priority });
-//     todos.push(newTodo);
-//     saveTodos(todos);
-//     renderTodos(todos, list);
+const allProjects = projectManager.getAllProjects();
 
-//     titleEl.value = "";
-//     descEl.value = "";
-//     dateEl.value = "";
-//     priorityEl.value = "low";
-//   });
-// });
+renderAllProjects(projectManager.getAllProjects());
 
-// document.querySelector("#add-project-btn").addEventListener("click", () => {
-//   const name = document.querySelector("#new-project-name").value.trim();
-//   if (name && !projects.includes(name)) {
-//     projects.push(name);
-//     saveProjects(projects); // ← добавь
-//     renderProjects();
-//     document.querySelector("#new-project-name").value = "";
-//   }
-// });
+if (allProjects.length > 0) {
+  const firstProject = allProjects[0];
+  const firstProjectElement = document.querySelector(`[data-id="${firstProject.id}"]`);
+  if (firstProjectElement) {
+    selectProject(firstProject, firstProjectElement);
 
-// renderProjects();
-// renderTodos(
-//   todos.filter((t) => t.project === currentProject),
-//   list
-// );
+    // 💡 Сразу применяем сортировку по заголовку
+    const sortedTodos = todoManager.sortTodosByTitle(firstProject.id);
+    renderTodosFromArray(firstProject.id, sortedTodos);
+
+    // 💡 И обновляем подпись на кнопке
+    const sortLabel = document.querySelector('.sort-label');
+    if (sortLabel) sortLabel.textContent = 'Sort by: Title';
+  }
+}
+
+
+
+
+// ========== DELETE PROJECT ==========
+document.querySelector('.btn-delete').addEventListener('click', () => {
+
+  const project = getActiveProject();
+  if (!project) return alert('No project selected');
+
+  if (confirm(`Delete project "${project.name}"?`)) {
+    projectManager.removeProject(project.id);
+    renderAllProjects(projectManager.getAllProjects());
+    selectProject(null, null); // сброс активного
+    renderTodosForProject(null); // очистка задач
+  }
+});
+
+// ========== EDIT PROJECT ==========
+document.querySelector('.btn-rename').addEventListener('click', () => {
+  const project = getActiveProject();
+  if (!project) return alert('No project selected');
+
+  ProjectModal.open(project);
+});
+
+
+// ========== Sorting button ==========
+document.getElementById('sort-button').addEventListener('click', () => {
+  const project = getActiveProject();
+  if (!project) return;
+
+  let sortedTodos;
+
+  if (sortMode === 'title') {
+    sortedTodos = todoManager.sortTodosByPriority(project.id);
+    sortMode = 'priority';
+  } else {
+    sortedTodos = todoManager.sortTodosByTitle(project.id);
+    sortMode = 'title';
+  }
+
+  document.querySelector('.sort-label').textContent =
+  sortMode === 'title' ? 'Sort by: Title' : 'Sort by: Priority';
+
+  renderTodosFromArray(project.id, sortedTodos);
+});

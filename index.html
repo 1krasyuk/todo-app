@@ -18,14 +18,14 @@
             </button>
           </div>
           <div class="projects-list">
-          <div class="project-item">
+          <!-- <div class="project-item">
             <i data-lucide="list"></i>
             <p class="project-list-name">Project 1</p>
           </div>
           <div class="project-item">
             <i data-lucide="list"></i>
             <p class="project-list-name">Project 2</p>
-          </div>
+          </div> -->
         </div>
         </section>
       </aside>
@@ -37,16 +37,86 @@
             <button class="btn-delete"><i data-lucide="trash-2"  ></i>Delete</button>
           </div>
         </div>
-          <div class="todo-actions">
+          <div class="todo-header-actions">
             <button class="btn-add-task"><i data-lucide="plus"></i>New task</button>
-            <button class="btn-sort"><i data-lucide="arrow-down-up"></i>Sort by</button>
+            <button id="sort-button">
+              <i data-lucide="arrow-down-up"></i>
+              <span class="sort-label">Sort by</span>
+            </button>          </div>
+          <div class="todo-list"></div>
+
+
+
+
+          <!-- MODAL FOR PROJECTS -->
+          <div id="project-modal" class="modal">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 id="modal-title">New Project</h2>
+                <button id="close-modal" class="close-btn">&times;</button>
+              </div>
+              <form id="project-form">
+                <div class="form-group">
+                  <label for="project-name">Name</label>
+                  <input type="text" id="project-name" required />
+                </div>
+                <div class="form-actions">
+                  <button type="button" id="cancel-project" class="btn btn-secondary">Cancel</button>
+                  <button type="submit" id="save-project" class="btn btn-primary">Save</button>
+                </div>
+              </form>
+            </div>
           </div>
 
+          <!-- TODO MODAL -->
+          <div id="todo-modal" class="modal">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 id="todo-modal-title">New Task</h2>
+                <button id="close-todo-modal" class="close-btn">&times;</button>
+              </div>
+              <form id="todo-form">
+                <div class="form-group">
+                  <label for="todo-title">Title</label>
+                  <input type="text" id="todo-title" name="title" required />
+                </div>
+                <div class="form-group">
+                  <label for="todo-description">Description</label>
+                  <textarea
+                    id="todo-description"
+                    name="description"
+                    rows="3"
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="todo-due-date">Due Date</label>
+                  <input type="date" id="todo-due-date" name="dueDate" />
+                </div>
+                <div class="form-group">
+                  <label for="todo-priority">Priority</label>
+                  <select id="todo-priority" name="priority">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                  </select>
+                </div>
+                <div class="form-actions">
+                  <button
+                    type="button"
+                    id="cancel-todo-btn"
+                    class="btn secondary-btn"
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" id="save-todo-btn" class="btn primary-btn">
+                    Save
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
 
-        <div class="todos">
-          <!-- Сюда будут добавляться задачи -->
-        </div>
-      </main>
+        </main>
     </div>
     <script type="module" src="/src/main.js"></script>
   </body>
